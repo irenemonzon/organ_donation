@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Glypha', 'Montserrat', 'Arial', 'sans-serif'],
+      },
     
     },
   },
