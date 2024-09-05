@@ -52,9 +52,9 @@ const InfoOrganDonate = () => {
   }, [videosLoaded]);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 px-14">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 px-16">
       {/* Sección de videos a la izquierda */}
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-8">
         {videos.map((videoUrl, index) => (
           <div key={`video-${index}`} className="w-full h-48 overflow-hidden rounded-md relative">
             {!videosLoaded[index] && (
@@ -78,7 +78,7 @@ const InfoOrganDonate = () => {
       </div>
 
       {/* Sección de fotos al centro */}
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-8">
         {photos.map((photoUrl, index) => (
           <div key={`photo-${index}`} className="w-full h-48 overflow-hidden rounded-md relative">
             {!photosLoaded[index] && (
@@ -99,7 +99,7 @@ const InfoOrganDonate = () => {
         ))}
       </div>
 
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-8">
         {videos.map((videoUrl, index) => (
           <div key={`video-${index}`} className="w-full h-48 overflow-hidden rounded-md relative">
             {!videosLoaded[index] && (
