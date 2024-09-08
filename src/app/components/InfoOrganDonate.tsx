@@ -85,7 +85,7 @@ const InfoOrganDonate = () => {
           {videos.map((videoUrl, index) => (
             <div
               key={`video-${index}`}
-              className="w-full h-48 overflow-hidden rounded-md relative bg-skeleton-dark"
+              className="w-full h-60 overflow-hidden rounded-md relative bg-skeleton-dark"
               ref={(el) => {
                 videoRefs.current[index] = el;
               }}
@@ -106,7 +106,7 @@ const InfoOrganDonate = () => {
 
         <div className="flex flex-col space-y-8">
           {photos.map((photoUrl, index) => (
-            <div key={`photo-${index}`} className="w-full h-48 overflow-hidden rounded-md relative bg-skeleton-dark">
+            <div key={`photo-${index}`} className="w-full h-60 overflow-hidden rounded-md relative bg-skeleton-dark">
               <div className="absolute inset-0 flex items-center justify-center">
                 <Image
                   src={photoUrl}
@@ -128,7 +128,7 @@ const InfoOrganDonate = () => {
           {videos.map((videoUrl, index) => (
             <div
               key={`video-${index}`}
-              className="w-full h-48 overflow-hidden rounded-md relative bg-skeleton-dark"
+              className="w-full h-60 overflow-hidden rounded-md relative bg-skeleton-dark"
               ref={(el) => {
                 videoRefs.current[index] = el;
               }}
