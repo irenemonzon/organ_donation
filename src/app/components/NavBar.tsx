@@ -7,8 +7,8 @@ const NavBar = () => {
   return (
     <nav className='flex flex-col justify-center'>
         <div className=' flex w-full h-14'>
-            <div className='w-2/4 bg-slate-700'/>
-            <div className=' w-2/4 bg-pink-700'/>   
+            <div className='w-2/4 bg-navbar-blue'/>
+            <div className=' w-2/4 bg-navbar-pink'/>   
         </div>
         <div className='flex items-center justify-center'>
             <Image 
@@ -29,8 +29,8 @@ const NavBar = () => {
             />
         </div>
         <div className=' flex w-full h-14'>
-            <div className=' w-2/4 bg-pink-700'/> 
-            <div className='w-2/4 bg-slate-700'/>   
+            <div className=' w-2/4 bg-navbar-pink'/> 
+            <div className='w-2/4 bg-navbar-blue'/>   
         </div>
     </nav>
   )

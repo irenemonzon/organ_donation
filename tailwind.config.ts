@@ -7,6 +7,11 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    colors:{
+      'navbar-pink':'#AD0779',
+      'navbar-blue':'#24465E',
+      'green-line':'#2D572C'
+    },
     extend: {
       fontFamily: {
         sans: ['Glypha', 'Montserrat', 'Arial', 'sans-serif'],

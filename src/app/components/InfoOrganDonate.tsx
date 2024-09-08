@@ -75,73 +75,83 @@ const InfoOrganDonate = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 px-16">
-      <div className="flex flex-col space-y-8">
-        {videos.map((videoUrl, index) => (
-          <div
-            key={`video-${index}`}
-            className="w-full h-48 overflow-hidden rounded-md relative bg-skeleton-dark"
-            ref={(el) => {
-              videoRefs.current[index] = el;
-            }}
-          >
-            <div className="absolute inset-0 flex items-center justify-center">
-              {!visibleVideos[index] && (
-                <div className="w-full h-full bg-skeleton-gradient animate-shimmer" />
-              )}
-              {visibleVideos[index] && (
-                <Suspense fallback={<div className="w-full h-full bg-skeleton-gradient animate-shimmer" />}>
-                  <LazyVideo videoUrl={videoUrl} />
-                </Suspense>
-              )}
-            </div>
-          </div>
-        ))}
+    <>
+      <div className="flex w-full mb-20">
+        <div className="bg-green-line  w-[45%] h-6 rounded-r-2xl"/>
       </div>
+   
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 px-16">
+        <div className="flex flex-col space-y-8">
+          {videos.map((videoUrl, index) => (
+            <div
+              key={`video-${index}`}
+              className="w-full h-48 overflow-hidden rounded-md relative bg-skeleton-dark"
+              ref={(el) => {
+                videoRefs.current[index] = el;
+              }}
+            >
+              <div className="absolute inset-0 flex items-center justify-center">
+                {!visibleVideos[index] && (
+                  <div className="w-full h-full bg-skeleton-gradient animate-shimmer" />
+                )}
+                {visibleVideos[index] && (
+                  <Suspense fallback={<div className="w-full h-full bg-skeleton-gradient animate-shimmer" />}>
+                    <LazyVideo videoUrl={videoUrl} />
+                  </Suspense>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
 
-      <div className="flex flex-col space-y-8">
-        {photos.map((photoUrl, index) => (
-          <div key={`photo-${index}`} className="w-full h-48 overflow-hidden rounded-md relative bg-skeleton-dark">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Image
-                src={photoUrl}
-                alt={`Photo ${index}`}
-                width={1920}
-                height={1080}
-                priority
-                className={`object-cover w-full h-full opacity-100`}
-                onLoad={() => handleImageLoad(index)}
-                unoptimized
-                style={{ transition: "opacity 0.5s ease, transform 0.5s ease" }}
-              />
+        <div className="flex flex-col space-y-8">
+          {photos.map((photoUrl, index) => (
+            <div key={`photo-${index}`} className="w-full h-48 overflow-hidden rounded-md relative bg-skeleton-dark">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Image
+                  src={photoUrl}
+                  alt={`Photo ${index}`}
+                  width={1920}
+                  height={1080}
+                  priority
+                  className={`object-cover w-full h-full opacity-100`}
+                  onLoad={() => handleImageLoad(index)}
+                  unoptimized
+                  style={{ transition: "opacity 0.5s ease, transform 0.5s ease" }}
+                />
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <div className="flex flex-col space-y-8">
-        {videos.map((videoUrl, index) => (
-          <div
-            key={`video-${index}`}
-            className="w-full h-48 overflow-hidden rounded-md relative bg-skeleton-dark"
-            ref={(el) => {
-              videoRefs.current[index] = el;
-            }}
-          >
-            <div className="absolute inset-0 flex items-center justify-center">
-              {!visibleVideos[index] && (
-                <div className="w-full h-full bg-skeleton-gradient animate-shimmer" />
-              )}
-              {visibleVideos[index] && (
-                <Suspense fallback={<div className="w-full h-full bg-skeleton-gradient animate-shimmer" />}>
-                  <LazyVideo videoUrl={videoUrl} />
-                </Suspense>
-              )}
+        <div className="flex flex-col space-y-8">
+          {videos.map((videoUrl, index) => (
+            <div
+              key={`video-${index}`}
+              className="w-full h-48 overflow-hidden rounded-md relative bg-skeleton-dark"
+              ref={(el) => {
+                videoRefs.current[index] = el;
+              }}
+            >
+              <div className="absolute inset-0 flex items-center justify-center">
+                {!visibleVideos[index] && (
+                  <div className="w-full h-full bg-skeleton-gradient animate-shimmer" />
+                )}
+                {visibleVideos[index] && (
+                  <Suspense fallback={<div className="w-full h-full bg-skeleton-gradient animate-shimmer" />}>
+                    <LazyVideo videoUrl={videoUrl} />
+                  </Suspense>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    
+      <div className="flex w-full mt-20 justify-end ">
+        <div className="flex  bg-green-line w-[45%] h-6 rounded-l-2xl"/>
+      </div>
+    </>
   );
 };
 
