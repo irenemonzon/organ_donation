@@ -1,4 +1,5 @@
-"use client";
+"use client"
+
 import React, { useState, useEffect, useCallback, Suspense, useRef } from "react";
 import Image from "next/image";
 
@@ -37,8 +38,9 @@ const InfoOrganDonate = () => {
   const [photosLoaded, setPhotosLoaded] = useState<boolean[]>(Array(photos.length).fill(false));
   const [visibleVideos, setVisibleVideos] = useState<boolean[]>(Array(videos.length).fill(false));
 
+
   const handleImageLoad = useCallback((index: number) => {
-    setPhotosLoaded((prev) => {
+    setPhotosLoaded(prev => {
       const updated = [...prev];
       updated[index] = true;
       return updated;
@@ -48,12 +50,12 @@ const InfoOrganDonate = () => {
   const videoRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           const index = videoRefs.current.indexOf(entry.target as HTMLDivElement);
           if (index !== -1) {
-            setVisibleVideos((prev) => {
+            setVisibleVideos(prev => {
               const updated = [...prev];
               updated[index] = true;
               return updated;
@@ -63,68 +65,56 @@ const InfoOrganDonate = () => {
       });
     });
 
-    videoRefs.current.forEach((video) => {
+    videoRefs.current.forEach(video => {
       if (video) observer.observe(video);
     });
 
     return () => {
-      if (videoRefs.current) {
-        videoRefs.current.forEach((video) => video && observer.unobserve(video));
-      }
+      videoRefs.current.forEach(video => video && observer.unobserve(video));
     };
   }, []);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 px-16">
-      {/* Sección de videos a la izquierda */}
       <div className="flex flex-col space-y-8">
         {videos.map((videoUrl, index) => (
           <div
             key={`video-${index}`}
-            className="w-full h-48 overflow-hidden rounded-md relative"
+            className="w-full h-48 overflow-hidden rounded-md relative bg-skeleton-dark"
             ref={(el) => {
               videoRefs.current[index] = el;
             }}
-            style={{ position: 'relative' }}
           >
-            {!visibleVideos[index] && (
-              <div
-                className="absolute inset-0 flex items-center justify-center bg-gray-300 rounded-md animate-pulse"
-                style={{ transition: "opacity 0.5s ease" }}
-              >
-                <span className="text-gray-600">Loading...</span>
-              </div>
-            )}
-            {visibleVideos[index] && (
-              <Suspense fallback={<div className="text-gray-600">Loading video...</div>}>
-                <LazyVideo videoUrl={videoUrl} />
-              </Suspense>
-            )}
+            <div className="absolute inset-0 flex items-center justify-center">
+              {!visibleVideos[index] && (
+                <div className="w-full h-full bg-skeleton-gradient animate-shimmer" />
+              )}
+              {visibleVideos[index] && (
+                <Suspense fallback={<div className="w-full h-full bg-skeleton-gradient animate-shimmer" />}>
+                  <LazyVideo videoUrl={videoUrl} />
+                </Suspense>
+              )}
+            </div>
           </div>
         ))}
       </div>
 
-      {/* Sección de fotos al centro */}
       <div className="flex flex-col space-y-8">
         {photos.map((photoUrl, index) => (
-          <div key={`photo-${index}`} className="w-full h-48 overflow-hidden rounded-md relative">
-            {!photosLoaded[index] && (
-              <div
-                className="absolute inset-0 flex items-center justify-center bg-gray-300 rounded-md animate-pulse"
-                style={{ transition: "opacity 0.5s ease" }}
-              >
-                <span className="text-gray-600">Loading...</span>
-              </div>
-            )}
-            <Image
-              src={photos[index]} // Usa el URL directamente
-              alt={`Photo ${index}`}
-              width={1920}
-              height={1080}
-              className={`object-cover w-full h-full ${photosLoaded[index] ? "opacity-100" : "opacity-0"}`}
-              onLoad={() => handleImageLoad(index)}
-              style={{ transition: "opacity 0.5s ease, transform 0.5s ease" }}
-            />
+          <div key={`photo-${index}`} className="w-full h-48 overflow-hidden rounded-md relative bg-skeleton-dark">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Image
+                src={photoUrl}
+                alt={`Photo ${index}`}
+                width={1920}
+                height={1080}
+                priority
+                className={`object-cover w-full h-full opacity-100`}
+                onLoad={() => handleImageLoad(index)}
+                unoptimized
+                style={{ transition: "opacity 0.5s ease, transform 0.5s ease" }}
+              />
+            </div>
           </div>
         ))}
       </div>
@@ -133,24 +123,21 @@ const InfoOrganDonate = () => {
         {videos.map((videoUrl, index) => (
           <div
             key={`video-${index}`}
-            className="w-full h-48 overflow-hidden rounded-md relative"
+            className="w-full h-48 overflow-hidden rounded-md relative bg-skeleton-dark"
             ref={(el) => {
               videoRefs.current[index] = el;
             }}
           >
-            {!visibleVideos[index] && (
-              <div
-                className="absolute inset-0 flex items-center justify-center bg-gray-300 rounded-md animate-pulse"
-                style={{ transition: "opacity 0.5s ease" }}
-              >
-                <span className="text-gray-600">Loading...</span>
-              </div>
-            )}
-            {visibleVideos[index] && (
-              <Suspense fallback={<div className="text-gray-600">Loading video...</div>}>
-                <LazyVideo videoUrl={videoUrl} />
-              </Suspense>
-            )}
+            <div className="absolute inset-0 flex items-center justify-center">
+              {!visibleVideos[index] && (
+                <div className="w-full h-full bg-skeleton-gradient animate-shimmer" />
+              )}
+              {visibleVideos[index] && (
+                <Suspense fallback={<div className="w-full h-full bg-skeleton-gradient animate-shimmer" />}>
+                  <LazyVideo videoUrl={videoUrl} />
+                </Suspense>
+              )}
+            </div>
           </div>
         ))}
       </div>

@@ -11,7 +11,23 @@ const config: Config = {
       fontFamily: {
         sans: ['Glypha', 'Montserrat', 'Arial', 'sans-serif'],
       },
-    
+      keyframes: {
+        shimmer: {
+          '0%': { backgroundPosition: '-1000px 0' },
+          '50%': { backgroundPosition: '0 0' },
+          '100%': { backgroundPosition: '1000px 0' },
+        },
+      },
+      animation: {
+        shimmer: 'shimmer 3s infinite', 
+      },
+      colors: {
+        'skeleton-light': '#f0f0f0',
+        'skeleton-dark': '#e0e0e0',
+      },
+      backgroundImage: {
+        'skeleton-gradient': 'linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%)',
+      },
     },
   },
   plugins: [],
