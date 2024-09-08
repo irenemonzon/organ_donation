@@ -14,7 +14,8 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        sans: ['Glypha', 'Montserrat', 'Arial', 'sans-serif'],
+        sans: [ 'Montserrat', 'Arial', 'sans-serif'],
+        Arvo: ['Arvo', 'Arial', 'sans-serif'],
       },
       keyframes: {
         shimmer: {
