@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback, Suspense, useRef } from "react";
 import Image from "next/image";
+import { FacebookShareButton} from "react-share"
 
 const LazyVideo = ({ videoUrl }: { videoUrl: string }) => {
   return (
@@ -35,12 +36,11 @@ const InfoOrganDonate = () => {
     "https://www.youtube.com/embed/dQw4w9WgXcQ",
   ];
 
-  const [photosLoaded, setPhotosLoaded] = useState<boolean[]>(Array(photos.length).fill(false));
   const [visibleVideos, setVisibleVideos] = useState<boolean[]>(Array(videos.length).fill(false));
-
+  const [photosLoaded, setPhotosLoaded] = useState<boolean[]>(Array(photos.length).fill(false));
 
   const handleImageLoad = useCallback((index: number) => {
-    setPhotosLoaded(prev => {
+    setPhotosLoaded((prev) => {
       const updated = [...prev];
       updated[index] = true;
       return updated;
@@ -48,6 +48,14 @@ const InfoOrganDonate = () => {
   }, []);
 
   const videoRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [origin, setOrigin] = useState<string>("");
+
+  // Solo asignar `window.location.origin` en el cliente
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setOrigin(window.location.origin);
+    }
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
@@ -104,25 +112,46 @@ const InfoOrganDonate = () => {
           ))}
         </div>
 
+
         <div className="flex flex-col space-y-8">
           {photos.map((photoUrl, index) => (
-            <div key={`photo-${index}`} className="w-full h-60 overflow-hidden rounded-md relative bg-skeleton-dark">
+            <div key={`photo-${index}`} className="relative w-full h-60 overflow-hidden rounded-md bg-skeleton-dark">
               <div className="absolute inset-0 flex items-center justify-center">
+                {/* Usar el componente Image de Next.js para las fotos */}
                 <Image
                   src={photoUrl}
                   alt={`Photo ${index}`}
                   width={1920}
                   height={1080}
                   priority
-                  className={`object-cover w-full h-full opacity-100`}
+                  className="object-cover w-full h-full opacity-100"
                   onLoad={() => handleImageLoad(index)}
-                  unoptimized
                   style={{ transition: "opacity 0.5s ease, transform 0.5s ease" }}
                 />
               </div>
+
+              {/* Botón de compartir en Facebook usando tu icono */}
+              {origin && (
+                <FacebookShareButton
+                  url={origin + photoUrl}
+                  hashtag="#OrganDonation"
+                  className="absolute top-2 right-2"
+                >
+                  <div className="bg-gray-200 hover:bg-gray-400 p-2 rounded-full">
+                    <Image
+                      src="/share-icon.png"
+                      alt="Compartir en Facebook"
+                      width={16}
+                      height={16}
+                      className="w-6 h-6"
+                    />
+                  </div>
+                </FacebookShareButton>
+              )}
             </div>
           ))}
         </div>
+
 
         <div className="flex flex-col space-y-8">
           {videos.map((videoUrl, index) => (
