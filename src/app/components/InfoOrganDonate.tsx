@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback, Suspense, useRef } from "react";
 import Image from "next/image";
-import { FacebookShareButton} from "react-share"
+import { FacebookShareButton } from "react-share";
 
 const LazyVideo = ({ videoUrl }: { videoUrl: string }) => {
   return (
@@ -58,12 +58,12 @@ const InfoOrganDonate = () => {
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const index = videoRefs.current.indexOf(entry.target as HTMLDivElement);
           if (index !== -1) {
-            setVisibleVideos(prev => {
+            setVisibleVideos((prev) => {
               const updated = [...prev];
               updated[index] = true;
               return updated;
@@ -73,21 +73,21 @@ const InfoOrganDonate = () => {
       });
     });
 
-    videoRefs.current.forEach(video => {
+    videoRefs.current.forEach((video) => {
       if (video) observer.observe(video);
     });
 
     return () => {
-      videoRefs.current.forEach(video => video && observer.unobserve(video));
+      videoRefs.current.forEach((video) => video && observer.unobserve(video));
     };
   }, []);
 
   return (
     <>
       <div className="flex w-full mb-20">
-        <div className="bg-green-line  w-[45%] h-6 rounded-r-2xl"/>
+        <div className="bg-green-line w-[45%] h-6 rounded-r-2xl" />
       </div>
-   
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 px-16">
         <div className="flex flex-col space-y-8">
           {videos.map((videoUrl, index) => (
@@ -112,12 +112,11 @@ const InfoOrganDonate = () => {
           ))}
         </div>
 
-
         <div className="flex flex-col space-y-8">
           {photos.map((photoUrl, index) => (
             <div key={`photo-${index}`} className="relative w-full h-60 overflow-hidden rounded-md bg-skeleton-dark">
               <div className="absolute inset-0 flex items-center justify-center">
-                {/* Usar el componente Image de Next.js para las fotos */}
+              
                 <Image
                   src={photoUrl}
                   alt={`Photo ${index}`}
@@ -130,28 +129,29 @@ const InfoOrganDonate = () => {
                 />
               </div>
 
-              {/* Botón de compartir en Facebook usando tu icono */}
               {origin && (
                 <FacebookShareButton
                   url={origin + photoUrl}
                   hashtag="#OrganDonation"
-                  className="absolute top-2 right-2"
+                  className="absolute top-1 right-2 group"
                 >
-                  <div className="bg-gray-200 hover:bg-gray-400 p-2 rounded-full">
+                  <div className=" group bg-gray-200 p-2 rounded-full ">
                     <Image
                       src="/share-icon.png"
-                      alt="Compartir en Facebook"
-                      width={16}
-                      height={16}
-                      className="w-6 h-6"
+                      alt="Share in Facebook"
+                      width={46}
+                      height={46}
+                      className="w-7 h-7"
                     />
+                  </div>
+                  <div className="absolute top-8 right-0 text-skeleton-light font-bold text-xs px-2 py-1  opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    Share
                   </div>
                 </FacebookShareButton>
               )}
             </div>
           ))}
         </div>
-
 
         <div className="flex flex-col space-y-8">
           {videos.map((videoUrl, index) => (
@@ -176,9 +176,9 @@ const InfoOrganDonate = () => {
           ))}
         </div>
       </div>
-    
-      <div className="flex w-full mt-20 justify-end ">
-        <div className="flex  bg-green-line w-[45%] h-6 rounded-l-2xl"/>
+
+      <div className="flex w-full mt-20 justify-end">
+        <div className="flex bg-green-line w-[45%] h-6 rounded-l-2xl" />
       </div>
     </>
   );
