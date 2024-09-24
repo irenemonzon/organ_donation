@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from 'tailwindcss/defaultTheme'; // Importar la configuración por defecto
 
 const config: Config = {
   content: [
@@ -7,14 +8,16 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    colors:{
-      'navbar-pink':'#AD0779',
-      'navbar-blue':'#24465E',
-      'green-line':'#2D572C'
-    },
     extend: {
+      colors: {
+        'navbar-pink': '#AD0779',
+        'navbar-blue': '#24465E',
+        'green-line': '#2D572C',
+        'skeleton-light': '#f0f0f0',
+        'skeleton-dark': '#e0e0e0',
+      },
       fontFamily: {
-        sans: [ 'Montserrat', 'Arial', 'sans-serif'],
+        sans: ['Montserrat', 'Arial', 'sans-serif'],
         Arvo: ['Arvo', 'Arial', 'sans-serif'],
       },
       keyframes: {
@@ -25,11 +28,7 @@ const config: Config = {
         },
       },
       animation: {
-        shimmer: 'shimmer 3s infinite', 
-      },
-      colors: {
-        'skeleton-light': '#f0f0f0',
-        'skeleton-dark': '#e0e0e0',
+        shimmer: 'shimmer 3s infinite',
       },
       backgroundImage: {
         'skeleton-gradient': 'linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%)',
@@ -38,4 +37,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;
