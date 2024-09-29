@@ -78,79 +78,96 @@ const InfoOrganDonate = () => {
         <div className="bg-green-600 w-[50%] h-6 " />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 px-16">
-      <div className="flex flex-col space-y-8">
-        {Array(5)
-          .fill(0)
-          .map((_, index) => (
-             <div
-                key={`video-slider-left-${index}`}
-              className="w-full h-60 relative overflow-visible rounded-md bg-skeleton-dark"
-            >
-                <Slider {...settings}>
-                <div className="relative w-full h-60 z-0">
-                  <LazyVideo videoUrl={videos[index * 2 + 10]} />
-                </div>
-                <div className="relative w-full h-60 z-0">
-                  <LazyVideo videoUrl={videos[index * 2 + 11]} />
-                </div>
-                </Slider>
-              </div>
-          ))}
+        <div className="flex flex-col">
+            <div className="flex flex-col space-y-8">
+              {Array(5)
+                .fill(0)
+                .map((_, index) => (
+                  <div key={`video-slider-left-${index}`} className="flex- flex-col">
+                      <div
+                        className="w-full h-60 relative overflow-visible rounded-md bg-skeleton-dark"
+                      >
+                        <Slider {...settings}>
+                      <div className="relative w-full h-60 z-0">
+                        <LazyVideo videoUrl={videos[index * 2 + 10]} />
+                      </div>
+                      <div className="relative w-full h-60 z-0">
+                        <LazyVideo videoUrl={videos[index * 2 + 11]} />
+                      </div>
+                        </Slider>
+                      </div>
+                      <div className="py-4 px-5" >
+                          <p className="text-sm  text-center font-light font-sans">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui eum, reiciendis minus molestiae sed quas quis voluptatibus? Dolorem beatae totam consequuntur obcaecati eius? Fuga, reprehenderit aspernatur! Obcaecati id molestiae amet.</p>
+                       </div>
+                  </div>
+                ))}
+            </div>
+       
       </div>
 
         <div className="flex flex-col space-y-8">
           {photos.map((photoUrl, index) => (
-            <div
-              key={`photo-${index}`}
-              className="relative w-full h-60 overflow-hidden rounded-md bg-skeleton-dark"
-            >
-              <Image
-                src={photoUrl}
-                alt={`Photo ${index}`}
-                width={1920}
-                height={1080}
-                className="object-cover w-full h-full"
-              />
-              <FacebookShareButton
-                url={photoUrl}
-                hashtag="#OrganDonation"
-                className="absolute top-1 right-2 group"
-              >
-                <div className="group p-2 rounded-full">
+            <>
+              <div className="flex flex-col"  key={`photo-${index}`}>
+                <div
+                  className="relative w-full h-60 overflow-hidden rounded-md bg-skeleton-dark"
+                >
                   <Image
-                    src="/share-icon.png"
-                    alt="Share on Facebook"
-                    width={46}
-                    height={46}
-                    className="w-7 h-7"
+                    src={photoUrl}
+                    alt={`Photo ${index}`}
+                    width={1920}
+                    height={1080}
+                    className="object-cover w-full h-full"
                   />
+                  <FacebookShareButton
+                    url={photoUrl}
+                    hashtag="#OrganDonation"
+                    className="absolute top-1 right-2 group"
+                  >
+                    <div className="group p-2 rounded-full">
+                      <Image
+                        src="/share-icon.png"
+                        alt="Share on Facebook"
+                        width={46}
+                        height={46}
+                        className="w-7 h-7"
+                      />
+                    </div>
+                    <div className="absolute top-8 right-0 text-skeleton-light font-bold text-xs px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      Share
+                    </div>
+                  </FacebookShareButton>
                 </div>
-                <div className="absolute top-8 right-0 text-skeleton-light font-bold text-xs px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Share
+                <div className="py-4 px-5" >
+                <p className="text-sm  text-center font-light font-sans">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui eum, reiciendis minus molestiae sed quas quis voluptatibus? Dolorem beatae totam consequuntur obcaecati eius? Fuga, reprehenderit aspernatur! Obcaecati id molestiae amet.</p>
                 </div>
-              </FacebookShareButton>
-            </div>
+              </div>
+            </>
           ))}
         </div>
 
         <div className="flex flex-col space-y-8">
-          {Array(5)
-            .fill(0)
-            .map((_, index) => (
-              <div
-                key={`video-slider-left-${index}`}
-                className="w-full h-60 relative overflow-visible rounded-md bg-skeleton-dark"
-              >
-                <Slider {...settings}>
-                  <div className="relative w-full h-60 z-0">
-                    <LazyVideo videoUrl={videos[index * 2 + 10]} />
+        {Array(5)
+                .fill(0)
+                .map((_, index) => (
+                  <div key={`video-slider-left-${index}`} className="flex- flex-col">
+                      <div
+                        className="w-full h-60 relative overflow-visible rounded-md bg-skeleton-dark"
+                      >
+                        <Slider {...settings}>
+                      <div className="relative w-full h-60 z-0">
+                        <LazyVideo videoUrl={videos[index * 2 + 10]} />
+                      </div>
+                      <div className="relative w-full h-60 z-0">
+                        <LazyVideo videoUrl={videos[index * 2 + 11]} />
+                      </div>
+                        </Slider>
+                      </div>
+                      <div className="py-4 px-5" >
+                          <p className="text-sm  text-center font-light font-sans">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui eum, reiciendis minus molestiae sed quas quis voluptatibus? Dolorem beatae totam consequuntur obcaecati eius? Fuga, reprehenderit aspernatur! Obcaecati id molestiae amet.</p>
+                       </div>
                   </div>
-                  <div className="relative w-full h-60 z-0">
-                    <LazyVideo videoUrl={videos[index * 2 + 11]} />
-                  </div>
-                </Slider>
-              </div>
-            ))}
+                ))}
       </div>
       </div>
       <div className="flex w-full mt-20 justify-end">
