@@ -1,0 +1,18 @@
+// InfoOrganDonate.module.scss
+.dot {
+    width: 8px;
+    height: 8px;
+    background-color: #5b5e63; 
+    border-radius: 50%;
+    transition: background-color 0.3s ease, border 0.3s ease;
+  
+    &:hover {
+      background-color: #4b5563; 
+    }
+  }
+  
+  :global(.slick-active) .dot {
+    background-color: #b7bbc2;
+    border: 2px solid #b7bbc2; 
+  }
+  
