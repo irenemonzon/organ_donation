@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { FacebookShareButton } from "react-share";
 import Slider from "react-slick";
@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import styles from '../styles/slider.module.scss'
 
 const LazyVideo = ({ videoUrl }: { videoUrl: string }) => {
+  
   return (
     <iframe
       src={videoUrl}
@@ -22,6 +23,8 @@ const LazyVideo = ({ videoUrl }: { videoUrl: string }) => {
 };
 
 const InfoOrganDonate = () => {
+
+  
   const photos = [
     "/interview1.jpg",
     "/interview2.jpg",
@@ -53,6 +56,24 @@ const InfoOrganDonate = () => {
     "https://www.youtube.com/embed/dQw4w9WgXcQ",
     "https://www.youtube.com/embed/dQw4w9WgXcQ",
   ];
+
+  const [photosLoaded, setPhotosLoaded] = useState<boolean[]>(Array(photos.length).fill(false));
+
+  const handleImageLoad = useCallback((index: number) => {
+    setPhotosLoaded((prev) => {
+      const updated = [...prev];
+      updated[index] = true;
+      return updated;
+    });
+  }, []);
+  const [origin, setOrigin] = useState<string>("");
+
+  // Solo asignar `window.location.origin` en el cliente
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setOrigin(window.location.origin);
+    }
+  }, [])
 
   const settings = {
     dots: true,
@@ -119,24 +140,26 @@ const InfoOrganDonate = () => {
                     height={1080}
                     className="object-cover w-full h-full"
                   />
-                  <FacebookShareButton
-                    url={photoUrl}
-                    hashtag="#OrganDonation"
-                    className="absolute top-1 right-2 group"
-                  >
-                    <div className="group p-2 rounded-full">
-                      <Image
-                        src="/share-icon.png"
-                        alt="Share on Facebook"
-                        width={46}
-                        height={46}
-                        className="w-7 h-7"
-                      />
-                    </div>
-                    <div className="absolute top-8 right-0 text-skeleton-light font-bold text-xs px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      Share
-                    </div>
-                  </FacebookShareButton>
+                  {origin && (
+                <FacebookShareButton
+                  url={origin + photoUrl}
+                  hashtag="#OrganDonation"
+                  className="absolute top-1 right-2 group"
+                >
+                  <div className=" group p-2 rounded-full ">
+                    <Image
+                      src="/share-icon.png"
+                      alt="Share in Facebook"
+                      width={46}
+                      height={46}
+                      className="w-7 h-7"
+                    />
+                  </div>
+                  <div className="absolute top-8 right-0 text-skeleton-light font-bold text-xs px-2 py-1  opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    Share
+                  </div>
+                </FacebookShareButton>
+              )}
                 </div>
                 <div className="py-4 px-5" >
                 <p className="text-sm  text-center font-light font-sans">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui eum, reiciendis minus molestiae sed quas quis voluptatibus? Dolorem beatae totam consequuntur obcaecati eius? Fuga, reprehenderit aspernatur! Obcaecati id molestiae amet.</p>
